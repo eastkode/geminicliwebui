@@ -2,18 +2,11 @@ version: "3.8"
 
 services:
   gemini-webui:
-    image: node:20.18.1-slim
+    build: .
     container_name: gemini-webui
-    working_dir: /app
-    volumes:
-      - ./public:/app/public
-      - ./server.js:/app/server.js
-      - ~/.gemini:/home/node/.gemini
-    environment:
-      - GEMINI_API_KEY=${GEMINI_API_KEY}
     ports:
       - "6969:6969"
-    command: >
-      sh -c "npm install express @google/genai && node server.js"
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
     stdin_open: true
     tty: true
